@@ -32,7 +32,7 @@ func init() {
 func main() {
 	t := time.NewTicker(time.Duration(viper.GetInt64("refreshInterval")) * time.Minute)
 	c := cache.New(5*time.Hour, 30*time.Second)
-	fmt.Println("Running ...", "CTRL + C to quit")
+	fmt.Printf("Running ...\n(press CTRL + C to quit)")
 	for now := range t.C {
 		x, found := c.Get("ipa")
 		if !found {
