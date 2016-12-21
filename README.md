@@ -2,10 +2,7 @@
 SendMeIP is a small application that checks your public IP and sends an email if it changes. It also sends the IP every 5 hours even if it hasn't changed.
 
 ## Install
-```go get -d github.com/dvwallin/sendmeip``` 
-```cd $GOPATH/src/github.com/dvwallin/sendmeip```
-```go install```
-```mkdir $HOME/.sendmeip && cp example_config.yaml $HOME/.sendmeip/config.yaml```
+`go get -d github.com/dvwallin/sendmeip` `cd $GOPATH/src/github.com/dvwallin/sendmeip` `go install` `mkdir $HOME/.sendmeip && cp example_config.yaml $HOME/.sendmeip/config.yaml`
 
 Now edit $HOME/.sendmeip/config.yaml and set the parameters to whatever you want.
 The config.yaml can be placed in either /etc/sendmeip/ or $HOME/.sendmeip/ or in the directory you're in when running the application.
