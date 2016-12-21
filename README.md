@@ -22,3 +22,10 @@ smtpUser: example@gmail.com # smtp username
 smtpPass: ABC12345 # smtp password
 notifyAddr: myEmailAddr@example.org # which address do you want the emails to go to?
 ```
+
+## Credit
+Uses Viper, PubIP and go-cache.
+Thank you
+ - https://github.com/spf13/viper
+ - https://github.com/chyeh/pubip
+ - https://github.com/patrickmn/go-cache
