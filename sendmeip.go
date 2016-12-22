@@ -2,12 +2,15 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"net/smtp"
+	"regexp"
+	"strings"
+	"time"
+
 	"github.com/chyeh/pubip"
 	"github.com/patrickmn/go-cache"
 	"github.com/spf13/viper"
-	"log"
-	"net/smtp"
-	"time"
 )
 
 func init() {
@@ -40,8 +43,8 @@ func main() {
 		}
 		ip, _ := pubip.Get()
 		ipAddr := fmt.Sprintf("%s", ip)
-		if ipAddr != x.(string) {
-			c.Set("ipa", ipAddr, cache.DefaultExpiration)
+		if ipAddr != x.(string) && validIP4(ipAddr) {
+			c.Set("ipa", ipAddr, cache.NoExpiration)
 			send(fmt.Sprintf("New IP Address at home.\nIP: %s\nChanged: %s\n", ip, now))
 		}
 	}
@@ -68,4 +71,14 @@ func checkError(err error) {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
+}
+
+func validIP4(ipAddress string) bool {
+	ipAddress = strings.Trim(ipAddress, " ")
+
+	re, _ := regexp.Compile(`^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$`)
+	if re.MatchString(ipAddress) {
+		return true
+	}
+	return false
 }
